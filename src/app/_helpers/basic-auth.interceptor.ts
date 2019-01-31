@@ -17,7 +17,7 @@ export class BasicAuthInterceptor implements HttpInterceptor {
         
         return req.clone({ setHeaders: { 
             'Content-Type': 'application/json;charset=UTF-8', 
-            Authorization: 'Bearerd ' + token 
+            Authorization: 'Bearer ' + token 
         }})
     }
 

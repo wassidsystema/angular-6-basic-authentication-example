@@ -15,7 +15,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(null).pipe(mergeMap(() => {
 
             // authenticate
-            if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
+            if (request.url.endsWith('/auth') && request.method === 'POST') {
                 if (request.body.username === testUser.username && request.body.password === testUser.password) {
                     // if login details are valid return user details
                     let body = {
@@ -31,11 +31,29 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
+             // authenticate
+             if (request.url.endsWith('/user/findUserByEmail') && request.method === 'POST') {
+               // if (request.body.username === testUser.username && request.body.password === testUser.password) {
+                    // if login details are valid return user details
+                    let body = {
+                        id: testUser.id,
+                        username: testUser.username,
+                        firstName: testUser.firstName,
+                        lastName: testUser.lastName
+                    };
+                    return of(new HttpResponse({ status: 200, body }));
+              //  } else {
+                    // else return 400 bad request
+               //     return throwError({ error: { message: 'Username or password is incorrect' } });
+               // }
+            }
+
             // get users
             if (request.url.endsWith('/users') && request.method === 'GET') {
                     // check for fake auth token in header and return users if valid, this security 
                     // is implemented server side in a real application
-                    if (request.headers.get('Authorization') === `Basic ${window.btoa('test:test')}`) {
+                    debugger
+                    if (request.headers.get('Authorization') === `Bearer ${window.btoa('test:test')}`) {
                     return of(new HttpResponse({ status: 200, body: [testUser] }));
                 } else {
                     // return 401 not authorised if token is null or invalid
