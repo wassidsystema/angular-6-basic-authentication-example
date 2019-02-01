@@ -1,20 +1,8 @@
-﻿<!-- main app container -->
-<div class="jumbotron">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 offset-sm-3">
-                <router-outlet></router-outlet>
-            </div>
-        </div>
-    </div>
-</div>
+﻿<!-- header -->
+<app-header></app-header>
 
-<!-- credits -->
-<div class="text-center">
-    <p>
-        <a href="http://jasonwatmore.com/post/2018/09/07/angular-6-basic-http-authentication-tutorial-example" target="_top">Angular 6 - Basic HTTP Authentication Tutorial & Example</a>
-    </p>
-    <p>
-        <a href="http://jasonwatmore.com" target="_top">JasonWatmore.com</a>
-    </p>
-</div>
+<!-- routes will be rendered here -->
+<router-outlet></router-outlet>
+
+<!-- footer -->
+<app-footer></app-footer>
